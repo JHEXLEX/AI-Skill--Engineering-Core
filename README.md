@@ -1,361 +1,258 @@
-# Mühendislik Çekirdeği
+Engineering Core
 
-**Mühendislik Çekirdeği**, yapay zekânın belirli bir mühendislik dalını taklit etmek yerine probleme uygun disiplinleri bir araya getirerek **mühendislik düşüncesiyle karar üretmesini** amaçlayan genel amaçlı bir AI skill'idir.
 
-Mekanik, elektrik-elektronik, yazılım, gömülü sistemler, kontrol, üretim, malzeme, sistem mühendisliği, UX, veri/AI ve oyun geliştirme gibi alanları birbirinden bağımsız sınıflar olarak ele almak yerine, ihtiyaç olduğunda kullanılan mühendislik perspektifleri olarak görür.
 
-Temel hedef:
 
-> **Çalışan, doğrulanabilir, güvenli, yeterince basit ve gerçek dünya kısıtlarıyla uyumlu çözümler üretmek.**
 
----
 
-## Neden Mühendislik Çekirdeği?
+Engineering Core is a discipline-agnostic AI skill for structured engineering reasoning across hardware, software, control, manufacturing, interactive systems, and R&D.
 
-Birçok AI yardımcı sistemi belirli alanlara ayrılır:
+Instead of behaving like a collection of separate "mechanical", "electronics", or "game development" assistants, it treats engineering disciplines as perspectives to combine only when the problem requires them.
 
-* mekanik,
-* elektronik,
-* yazılım,
-* oyun geliştirme,
-* kontrol sistemleri,
-* gömülü sistemler,
-* vb.
+Goal: produce solutions that work, can be verified, are safe, are no more complex than necessary, and respect real-world constraints.
 
-Gerçek mühendislik problemleri ise çoğu zaman bu sınırları takip etmez.
+Why Engineering Core?
 
-Bir robot aynı anda mekanik, elektronik, kontrol, yazılım ve üretim problemidir.
+Real engineering problems rarely stay inside one discipline.
 
-Bir PCB yalnızca devre tasarımı değildir; güç, termal davranış, EMI/EMC, üretilebilirlik ve hata durumları da önemlidir.
+A robot may involve mechanics, electronics, embedded software, control, manufacturing, and human interaction. A PCB may require power integrity, protection, thermal thinking, EMC, firmware constraints, manufacturability, and testing. A multiplayer game system may involve software architecture, networking, state management, performance budgets, failure handling, and UX.
 
-Bir oyun sistemi yalnızca kod değildir; mimari, performans, ağ, veri akışı, hata yönetimi ve kullanıcı deneyimi de mühendislik kararları gerektirir.
+Engineering Core starts from a different question:
 
-Mühendislik Çekirdeği bu nedenle problemi önce bir kategoriye sokmak yerine şu soruyla başlar:
+Which engineering perspectives are actually required to solve this problem well?
 
-> **Bu problemi doğru çözmek için hangi mühendislik perspektiflerine ihtiyaç var?**
+The skill then scales its reasoning depth to the importance of the decision.
 
----
+Highlights
 
-## Temel Yaklaşım
+Cross-disciplinary by design — no single engineering field is treated as the default.
 
-Skill'in çalışma modeli:
+Requirements before solutions — separates the real need from the user's initial implementation idea.
 
-**Çerçevele → Ayrıştır → Üret → Analiz Et → Seç → Gerçekleştir → Doğrula → Öğren**
+Assumption-aware reasoning — distinguishes facts, assumptions, estimates, calculations, simulations, and measurements.
 
-Her problem bütün aşamaların kullanıcıya gösterilmesini gerektirmez.
+Trade-off driven decisions — balances performance, cost, safety, complexity, power, weight, latency, maintainability, manufacturability, and time.
 
-Ama gerektiğinde sistem:
+Verification-first thinking — asks what measurement or test would prove the design works.
 
-* gerçek problemi tanımlar,
-* gereksinimleri çözüm önerilerinden ayırır,
-* kritik varsayımları belirler,
-* sistemi alt parçalara ayırır,
-* disiplinler arası arayüzleri inceler,
-* alternatif çözümleri değerlendirir,
-* trade-off analizi yapar,
-* hesaplama veya araştırma ihtiyacını belirler,
-* riskleri ve hata durumlarını düşünür,
-* uygulanabilir çözümü seçer,
-* test ve doğrulama yöntemini belirler,
-* yeni kanıt geldiğinde önceki kararları günceller.
+Failure-aware design — considers plausible failure modes and safe behavior when consequences justify it.
 
----
+Complexity control — prefers the simplest sufficient solution and avoids unnecessary custom systems.
 
-## Mühendislik İlkeleri
+Context-efficient project work — tracks project changes by delta instead of repeating unchanged context.
 
-Mühendislik Çekirdeği belirli bir mühendislik alanının kurallarını ezberlemek yerine disiplinler arasında geçerli temel prensiplere dayanır.
+Response economy — engineering rigor without automatically producing long answers.
 
-### Problemi çözmeden önce problemi tanımla
+Engineering Model
 
-Hedef, başarı ölçütleri, kısıtlar ve başarısızlık koşulları birbirinden ayrılır.
+Engineering Core follows a compact engineering cycle:
 
-### Gereksinimi çözümden ayır
+Frame → Decompose → Generate → Analyze → Select → Implement → Verify → Learn
 
-Kullanıcının önerdiği yöntem doğrudan gereksinim kabul edilmez.
+Not every task needs every step to be visible. The skill applies only the depth required by the decision.
 
-Bir çözüm önerisinin arkasındaki gerçek ihtiyaç belirlenmeye çalışılır.
+Core decision gates
 
-### Varsayımları gerçeklerle karıştırma
+When a decision is important, the skill can evaluate it through five gates:
 
-Aşağıdaki kavramlar gerektiğinde birbirinden ayrılır:
+Feasible? — Do physics, technology, tools, and resources allow it?
 
-* gerçek,
-* varsayım,
-* tahmin,
-* hesap,
-* simülasyon,
-* ölçüm.
+Meets requirements? — Does it satisfy measurable targets?
 
-### Tek çözüme erken kilitlenme
+Safe and robust? — Is behavior acceptable under plausible faults and edge cases?
 
-Anlamlı alternatifler varsa değerlendirilir.
+Implementable / manufacturable? — Are tooling, tolerances, supply, runtime environment, and operations realistic?
 
-Ancak küçük problemler gereksiz seçeneklerle büyütülmez.
+Verifiable? — Is there a meaningful test or measurement plan?
 
-### Trade-off'ları kabul et
+Supported Engineering Perspectives
 
-Mühendislik kararları çoğu zaman şu faktörler arasında denge gerektirir:
+Engineering Core is intentionally not limited to a fixed list, but it can combine perspectives such as:
 
-* performans,
-* maliyet,
-* güvenlik,
-* karmaşıklık,
-* güç tüketimi,
-* ağırlık,
-* gecikme,
-* üretilebilirlik,
-* bakım,
-* geliştirme süresi.
+Perspective
 
-### En basit yeterli çözümü tercih et
+Typical concerns
 
-Daha karmaşık olması bir çözümü otomatik olarak daha iyi yapmaz.
+Mechanical
 
-Gereksiz:
+Loads, motion, strength, tolerances, tribology
 
-* bağımlılık,
-* parça,
-* soyutlama,
-* hassasiyet,
-* özel sistem
+Electrical / Electronic
 
-eklemekten kaçınılır.
+Power, protection, signal integrity, EMI/EMC
 
-### Arayüzleri kritik kabul et
+Control
 
-Birçok mühendislik problemi sistemlerin kendi içinden değil, sistemlerin birleştiği noktalardan ortaya çıkar.
+Stability, dynamic response, sensor and actuator limits
 
-Özellikle:
+Software
 
-* mekanik ↔ elektronik,
-* donanım ↔ yazılım,
-* modül ↔ modül,
-* kullanıcı ↔ sistem,
-* sistem ↔ çevre
+Architecture, errors, testing, security, performance, maintenance
 
-arayüzleri önemlidir.
+Embedded
 
-### Nominal değerle yetinme
+Real-time behavior, memory, power, peripherals, failure handling
 
-Probleme göre:
+Manufacturing
 
-* tolerans,
-* varyasyon,
-* sıcaklık,
-* yaşlanma,
-* gürültü,
-* gecikme,
-* yük değişimi,
-* hata payı,
-* uç durumlar
+Process capability, assembly, tolerance, quality, cost
 
-dikkate alınır.
+Materials
 
-### Hata durumlarını tasarımın parçası kabul et
+Strength, fatigue, temperature, environment, chemical compatibility
 
-Sadece sistemin normal çalışması değil, makul arıza durumlarında ne olacağı da önemlidir.
+Human / UX
 
-### Model ile gerçek sistemi ayır
+Ergonomics, clarity, accessibility, misuse and human error
 
-Hesaplama, simülasyon, benchmark ve AI tahminleri fiziksel veya gerçek sistem doğrulamasının yerine otomatik olarak geçmez.
+Systems
 
-### Doğrulanabilir tasarım üret
+Interfaces, integration, traceability, lifecycle
 
-Temel soru yalnızca:
+Games / Interactive Software
 
-> “Çalışıyor mu?”
+Game loops, state, networking, performance, data-driven design, UX
 
-değildir.
+The list is descriptive, not restrictive.
 
-Aynı zamanda:
+Installation
 
-> **“Hangi ölçüm veya test bunun çalıştığını kanıtlar?”**
+Download the latest .skill package from the repository releases and import it into a compatible AI skill system.
 
-sorusu sorulur.
+Current package:
 
----
+engineering-core-v3.skill
 
-## Disiplinler Üstü Yapı
+The v3 package is intentionally self-contained and does not require a separate references/ directory.
 
-Mühendislik Çekirdeği belirli bir alanla sınırlı değildir.
+Usage
 
-Probleme göre aşağıdaki perspektiflerden biri veya birkaçı birlikte kullanılabilir:
+Use Engineering Core as a general engineering reasoning layer. You do not need to specify a discipline in advance.
 
-**Mekanik:** yük, hareket, dayanım, tolerans, triboloji
+Example prompts
 
-**Elektrik / Elektronik:** güç, koruma, sinyal bütünlüğü, EMI/EMC
+Design a battery-powered mobile robot that can move a 15 kg payload for two hours.
+Help me identify the requirements first, then choose the architecture.
 
-**Kontrol:** kararlılık, dinamik cevap, sensör ve aktüatör sınırları
+Review this PCB power-input design. Focus on protection, thermal risks,
+component stress, and how I should validate it on the bench.
 
-**Yazılım:** mimari, veri akışı, hata yönetimi, test, güvenlik, performans
+I am building a networked ability system in Unreal Engine.
+Review the architecture for authority, replication, performance, failure cases,
+and maintainability before suggesting code changes.
 
-**Gömülü Sistemler:** gerçek zaman, bellek, güç, çevre birimleri, hata davranışı
+I need to redesign this mechanism to reduce cost without reducing safety.
+Compare the meaningful alternatives and tell me what should be tested first.
 
-**Üretim:** proses, tolerans, montaj, kalite, maliyet
+Design Philosophy
 
-**Malzeme:** dayanım, yorulma, sıcaklık ve çevresel uyumluluk
+Engineering Core is built around a small set of reusable principles rather than a large collection of domain-specific instruction files.
 
-**İnsan / UX:** ergonomi, anlaşılabilirlik, hata yapabilirlik, erişilebilirlik
+1. Solve the real problem
 
-**Sistem Mühendisliği:** arayüzler, entegrasyon, gereksinim izlenebilirliği, yaşam döngüsü
+A proposed implementation is not automatically the requirement. The skill tries to identify the objective, measurable success criteria, hard constraints, and failure conditions first.
 
-**Oyun ve Etkileşimli Yazılım:** oyun döngüsü, durum yönetimi, ağ, performans, veri odaklı tasarım ve kullanıcı deneyimi
+2. Treat uncertainty explicitly
 
-Bu liste bir kapsam sınırı değildir.
+If information is missing and decision-critical, ask for it. If it is not critical, make a reasonable assumption, state it briefly, and continue.
 
-Temel mühendislik ilkeleri farklı alanlara uygulanabilir.
+3. Prefer evidence over confidence
 
----
+Calculations, simulations, benchmarks, and AI-generated estimates are models. Important decisions should have a path to measurement or testing.
 
-## Karar Kapıları
+4. Avoid unnecessary complexity
 
-Kritik bir mühendislik kararı gerektiğinde sistem şu kontrolleri kullanabilir:
+More components, abstractions, services, precision, or custom infrastructure are not automatically better engineering.
 
-**Mümkün mü?**
-Fizik, teknoloji ve mevcut kaynaklar çözümü destekliyor mu?
+5. Focus on interfaces
 
-**Gereksinimi karşılıyor mu?**
-Ölçülebilir hedefler sağlanıyor mu?
+Many real failures occur where disciplines or modules meet: hardware/software, mechanical/electrical, system/user, subsystem/subsystem, and system/environment.
 
-**Güvenli ve sağlam mı?**
-Hata durumları ve uç koşullar kabul edilebilir mi?
+Context and Token Efficiency
 
-**Uygulanabilir mi?**
-Üretim, tolerans, araçlar, tedarik ve çalışma ortamı uygun mu?
+v3.0 removes the previous reference-heavy architecture and replaces it with a single compact engineering core.
 
-**Doğrulanabilir mi?**
-Çözüm için anlamlı bir test veya ölçüm yöntemi var mı?
+This is not just a file-size optimization. The reasoning model is designed to reduce unnecessary context and branching:
 
-Bu kontroller her yanıtta kullanıcıya gösterilmez. Karar mekanizmasının bir parçasıdır.
+Problem
+  ↓
+Critical requirements
+  ↓
+Relevant engineering perspectives
+  ↓
+Only the analysis that affects the decision
+  ↓
+Implementation / verification
 
----
+The skill also uses delta-based project state: unchanged context should not be repeatedly restated or reprocessed when only one decision changed.
 
-## Hesap ve Belirsizlik Yönetimi
+The intended result is broader engineering coverage with a smaller and more predictable active context.
 
-Teknik bir hesap önemli bir tasarım kararını etkiliyorsa sistem:
+Repository Structure
 
-* kritik girdileri belirler,
-* varsayımları ayırır,
-* birimleri kontrol eder,
-* sonuç mertebesini değerlendirir,
-* gerekli tasarım veya güvenlik paylarını düşünür,
-* belirsizliği saklamaz,
-* sahte hassasiyet üretmez.
+.
+├── README.md
+├── RELEASE_v3.0.md
+└── engineering-core-v3.skill
 
-Yeterli veri yoksa gereksiz kesinlik yerine yaklaşık değer, aralık veya ölçüm gereksinimi kullanılabilir.
+The .skill package contains a single core instruction file and no external reference modules.
 
----
+Contributing
 
-## Risk ve Hata Analizi
+Contributions are welcome when they improve the core without turning it back into a large domain-specific rulebook.
 
-Problemin kritikliği gerektiriyorsa aşağıdaki sorular değerlendirilir:
+Good contributions typically improve one or more of the following:
 
-* Ne yanlış gidebilir?
-* Bunun sebebi ne olabilir?
-* Etkisi ne olur?
-* Nasıl tespit edilir?
-* Nasıl önlenebilir?
-* Etkisi nasıl azaltılabilir?
-* Güvenli hata durumu nedir?
+clarity of an engineering principle,
 
-FMEA, Fault Tree veya benzeri formal yöntemler yalnızca gerçekten değer kattığında kullanılır.
+decision quality,
 
-Amaç küçük projelere gereksiz mühendislik bürokrasisi eklemek değildir.
+uncertainty handling,
 
----
+verification behavior,
 
-## Yazılım da Mühendisliktir
+failure-mode reasoning,
 
-Skill, kod üretimini yalnızca “çalışan kod yazmak” olarak görmez.
+context efficiency,
 
-Probleme göre:
+cross-disciplinary applicability,
 
-* sorumluluk dağılımı,
-* mimari,
-* veri akışı,
-* hata yönetimi,
-* edge-case davranışları,
-* test edilebilirlik,
-* performans,
-* kaynak bütçesi,
-* güvenlik,
-* bakım,
-* genişletilebilirlik
+unnecessary complexity reduction.
 
-dikkate alınabilir.
+When proposing a change, explain:
 
-Framework veya motorun yerleşik mekanizması problemi doğru şekilde çözüyorsa gereksiz özel sistem geliştirmekten kaçınılır.
+what failure mode or limitation it addresses,
 
----
+why the behavior belongs in the universal core,
 
-## Token ve Context Verimliliği
+whether it increases persistent context size,
 
-Mühendislik Çekirdeği v3.0 ile birlikte referans tabanlı mimariden çıkarılmıştır.
+how the change can be tested with representative prompts.
 
-Skill artık uzmanlık bilgilerini çok sayıda sabit referans dosyasına yüklemek yerine tek bir mühendislik çekirdeği üzerinden çalışır.
+Domain-specific knowledge is usually better supplied at task time than permanently embedded in the core.
 
-Bu yaklaşımın amacı:
+Versioning
 
-* gereksiz context yükünü azaltmak,
-* aynı kuralların tekrar işlenmesini önlemek,
-* yalnızca karar için gerekli bilgiyi kullanmak,
-* gereksiz uzun yanıt üretimini azaltmak,
-* proje boyunca değişmeyen bilgileri tekrar etmemek,
-* yeni bilgi geldiğinde yalnızca değişen durumu işlemek.
+The project follows semantic-style release numbering for major behavior changes.
 
-Proje bağlamında **delta tabanlı ilerleme** kullanılır.
+v3.0 is a breaking architectural release: the project moved from domain-centered project assistance to a discipline-agnostic engineering reasoning core.
 
----
+See RELEASE_v3.0.md for details.
 
-## Yanıt Ekonomisi
+Project Direction
 
-Mühendislik titizliği uzun cevap vermek anlamına gelmez.
+Engineering Core is intended to remain:
 
-Skill şu prensibi izler:
+small enough to be context-efficient,
 
-> **Basit probleme basit cevap, karmaşık probleme gerektiği kadar mühendislik.**
+general enough to cross engineering disciplines,
 
-Bu nedenle:
+strict enough to catch important assumptions and risks,
 
-* gereksiz tablolar oluşturulmaz,
-* formal analiz yöntemleri sebepsiz kullanılmaz,
-* aynı uyarılar tekrar edilmez,
-* tetiklenen bütün iç kurallar kullanıcıya dökülmez,
-* gereksiz alternatif üretilmez,
-* karar vermeye katkısı olmayan ayrıntılar azaltılır.
+flexible enough to avoid unnecessary process on simple tasks,
 
----
+verification-oriented rather than confidence-oriented.
 
-## v3.0
+The project is not trying to store all engineering knowledge inside one skill.
 
-v3.0 projenin önceki sürümlerinden önemli bir mimari ayrılıştır.
-
-Önceki yaklaşım ağırlıklı olarak mekatronik ve oyun geliştirme sınıfları etrafında şekillenirken, v3.0 ile proje tamamen **disiplinler üstü mühendislik çekirdeğine** dönüştürülmüştür.
-
-Başlıca değişiklikler:
-
-* Mekatronik merkezli yapı kaldırıldı.
-* Oyun geliştirme ayrı bir ana sınıf olmaktan çıkarıldı.
-* Disiplin tabanlı sınıflandırma yerine problem tabanlı mühendislik getirildi.
-* Referans dosyaları kaldırıldı.
-* Tek çekirdekli skill mimarisine geçildi.
-* Evrensel mühendislik ilkeleri oluşturuldu.
-* Trade-off ve karar kapıları güçlendirildi.
-* Belirsizlik ve varsayım yönetimi geliştirildi.
-* Verification & Validation yaklaşımı merkeze alındı.
-* Risk ve hata modu düşüncesi sisteme dahil edildi.
-* Proje hafızasında delta yaklaşımı kullanıldı.
-* Context ve token kullanımının azaltılması hedeflendi.
-* Çıktı uzunluğu ile mühendislik titizliği birbirinden ayrıldı.
-
----
-
-## Proje Felsefesi
-
-Mühendislik Çekirdeği'nin amacı yapay zekânın her konuda uzmanmış gibi davranması değildir.
-
-Amaç:
-
-> **Bilmediğini ayırabilen, varsayımlarını yöneten, doğru mühendislik sorularını soran, farklı disiplinleri gerektiğinde birleştiren ve ürettiği çözümün nasıl doğrulanacağını düşünen bir mühendislik çalışma biçimi oluşturmak.**
-
-Bir probleme yalnızca cevap vermek yerine, mümkün olduğunda **savunulabilir bir mühendislik kararı** üretmeye çalışır.
+It is trying to provide a better engineering operating model for an AI system.
