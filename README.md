@@ -1,55 +1,361 @@
-# 🤖 Mechatronic & Unreal Engine Custom Skill for Claude
+# Mühendislik Çekirdeği
 
-A specialized, context-aware Custom Skill set for **Claude**, designed to assist in **Mechatronics Engineering** calculations and **Unreal Engine 5** game development workflows. 
+**Mühendislik Çekirdeği**, yapay zekânın belirli bir mühendislik dalını taklit etmek yerine probleme uygun disiplinleri bir araya getirerek **mühendislik düşüncesiyle karar üretmesini** amaçlayan genel amaçlı bir AI skill'idir.
 
----
+Mekanik, elektrik-elektronik, yazılım, gömülü sistemler, kontrol, üretim, malzeme, sistem mühendisliği, UX, veri/AI ve oyun geliştirme gibi alanları birbirinden bağımsız sınıflar olarak ele almak yerine, ihtiyaç olduğunda kullanılan mühendislik perspektifleri olarak görür.
 
-## 🇹🇷 Türkçe Özet / About
+Temel hedef:
 
-Bu depo, **Claude** için özel olarak hazırlanmış; **Mekatronik Mühendisliği** hesaplamaları ve **Unreal Engine 5** oyun geliştirme süreçlerinde size rehberlik eden modüler bir **Custom Skill (Özel Yetenek)** setidir.
-
-### 💡 Öne Çıkan Özellikler ve Yapı
-* **Modüler Mimari:**
-  * **`SKILL.md`:** Ana kuralları ve orkestrasyon mantığını içerir.
-  * **10 Referans Dosyası:** Oyun/UE5 geliştirme (2 dosya), Mekatronik Mühendisliği hesaplama ve prensipleri (6 dosya) ve Genel/Kategori-bağımsız standartlar (2 dosya).
-* **Akıllı Tetiklenme:**
-  * Claude'a *"Bir proje geliştiriyorum"* veya *"Yeni bir UE5 projesine başlıyorum"* gibi net bir niyet belirttiğinizde otomatik olarak devreye girer.
-* **Oturum Kalıcılığı (Session Persistence):**
-  * Bir kez tetiklendikten sonra, aynı sohbet penceresi boyunca tekrar komut vermenize gerek kalmadan aktif kalmaya ve kaldığı yerden devam etmeye devam eder.
-* **Dil:** Tüm yetenek talimatları ve referans dokümanları **Türkçe** olarak kalibre edilmiştir.
+> **Çalışan, doğrulanabilir, güvenli, yeterince basit ve gerçek dünya kısıtlarıyla uyumlu çözümler üretmek.**
 
 ---
 
-## 📌 Features & Architecture
+## Neden Mühendislik Çekirdeği?
 
-This repository uses a modular, multi-file structure to provide deep domain knowledge without cluttering context windows until needed:
+Birçok AI yardımcı sistemi belirli alanlara ayrılır:
 
-* **`SKILL.md` (Main Core Rules):** Defines the orchestrator logic, trigger conditions, and overall guiding principles for Claude.
-* **10 Reference Modules:**
-  * 🎮 **Unreal Engine / Game Dev (2 Files):** Blueprint patterns, architecture principles, performance optimization, and game mechanics setup.
-  * ⚙️ **Mechatronic Engineering (6 Files):** Engineering calculations, physical system modeling, embedded logic, robotics, and hardware/control theory.
-  * 🛠️ **Category-Independent / Utility (2 Files):** General project structures, formatting standards, and cross-domain workflow rules.
+* mekanik,
+* elektronik,
+* yazılım,
+* oyun geliştirme,
+* kontrol sistemleri,
+* gömülü sistemler,
+* vb.
 
----
+Gerçek mühendislik problemleri ise çoğu zaman bu sınırları takip etmez.
 
-## ⚡ How It Works (Triggering & Session Persistence)
+Bir robot aynı anda mekanik, elektronik, kontrol, yazılım ve üretim problemidir.
 
-1. Once installed/configured, the skill remains lightweight until triggered.
-2. It automatically activates when you express a clear development intention (e.g., *"Bir proje geliştiriyorum"*, *"Yeni bir UE projesine başlıyorum"*, etc.).
-3. **Session Persistence:** Once activated, the context stays active throughout the entire conversation thread — no need to re-trigger or repeat instructions in subsequent prompts within that chat.
+Bir PCB yalnızca devre tasarımı değildir; güç, termal davranış, EMI/EMC, üretilebilirlik ve hata durumları da önemlidir.
 
----
+Bir oyun sistemi yalnızca kod değildir; mimari, performans, ağ, veri akışı, hata yönetimi ve kullanıcı deneyimi de mühendislik kararları gerektirir.
 
-## 🚀 Installation & Usage
+Mühendislik Çekirdeği bu nedenle problemi önce bir kategoriye sokmak yerine şu soruyla başlar:
 
-1. Copy or reference the content of `SKILL.md` (along with the `/references` folder) into your **Claude Custom Skills / Instructions** setup or your project's system prompt area.
-2. Start a conversation with Claude and declare your project intent (e.g. in Turkish: *"Mekatronik ve UE5 odaklı yeni bir proje geliştiriyorum"*).
-3. Claude will load the appropriate reference modules and guide you through engineering calculations, Blueprint/C++ architecture, or system design.
+> **Bu problemi doğru çözmek için hangi mühendislik perspektiflerine ihtiyaç var?**
 
 ---
 
-## 📄 License & Attribution
+## Temel Yaklaşım
 
-Feel free to fork, adapt, and improve this skill set for your own mechatronics and game development workflows!
+Skill'in çalışma modeli:
 
-Created by [JHEXLEX](https://github.com/JHEXLEX).
+**Çerçevele → Ayrıştır → Üret → Analiz Et → Seç → Gerçekleştir → Doğrula → Öğren**
+
+Her problem bütün aşamaların kullanıcıya gösterilmesini gerektirmez.
+
+Ama gerektiğinde sistem:
+
+* gerçek problemi tanımlar,
+* gereksinimleri çözüm önerilerinden ayırır,
+* kritik varsayımları belirler,
+* sistemi alt parçalara ayırır,
+* disiplinler arası arayüzleri inceler,
+* alternatif çözümleri değerlendirir,
+* trade-off analizi yapar,
+* hesaplama veya araştırma ihtiyacını belirler,
+* riskleri ve hata durumlarını düşünür,
+* uygulanabilir çözümü seçer,
+* test ve doğrulama yöntemini belirler,
+* yeni kanıt geldiğinde önceki kararları günceller.
+
+---
+
+## Mühendislik İlkeleri
+
+Mühendislik Çekirdeği belirli bir mühendislik alanının kurallarını ezberlemek yerine disiplinler arasında geçerli temel prensiplere dayanır.
+
+### Problemi çözmeden önce problemi tanımla
+
+Hedef, başarı ölçütleri, kısıtlar ve başarısızlık koşulları birbirinden ayrılır.
+
+### Gereksinimi çözümden ayır
+
+Kullanıcının önerdiği yöntem doğrudan gereksinim kabul edilmez.
+
+Bir çözüm önerisinin arkasındaki gerçek ihtiyaç belirlenmeye çalışılır.
+
+### Varsayımları gerçeklerle karıştırma
+
+Aşağıdaki kavramlar gerektiğinde birbirinden ayrılır:
+
+* gerçek,
+* varsayım,
+* tahmin,
+* hesap,
+* simülasyon,
+* ölçüm.
+
+### Tek çözüme erken kilitlenme
+
+Anlamlı alternatifler varsa değerlendirilir.
+
+Ancak küçük problemler gereksiz seçeneklerle büyütülmez.
+
+### Trade-off'ları kabul et
+
+Mühendislik kararları çoğu zaman şu faktörler arasında denge gerektirir:
+
+* performans,
+* maliyet,
+* güvenlik,
+* karmaşıklık,
+* güç tüketimi,
+* ağırlık,
+* gecikme,
+* üretilebilirlik,
+* bakım,
+* geliştirme süresi.
+
+### En basit yeterli çözümü tercih et
+
+Daha karmaşık olması bir çözümü otomatik olarak daha iyi yapmaz.
+
+Gereksiz:
+
+* bağımlılık,
+* parça,
+* soyutlama,
+* hassasiyet,
+* özel sistem
+
+eklemekten kaçınılır.
+
+### Arayüzleri kritik kabul et
+
+Birçok mühendislik problemi sistemlerin kendi içinden değil, sistemlerin birleştiği noktalardan ortaya çıkar.
+
+Özellikle:
+
+* mekanik ↔ elektronik,
+* donanım ↔ yazılım,
+* modül ↔ modül,
+* kullanıcı ↔ sistem,
+* sistem ↔ çevre
+
+arayüzleri önemlidir.
+
+### Nominal değerle yetinme
+
+Probleme göre:
+
+* tolerans,
+* varyasyon,
+* sıcaklık,
+* yaşlanma,
+* gürültü,
+* gecikme,
+* yük değişimi,
+* hata payı,
+* uç durumlar
+
+dikkate alınır.
+
+### Hata durumlarını tasarımın parçası kabul et
+
+Sadece sistemin normal çalışması değil, makul arıza durumlarında ne olacağı da önemlidir.
+
+### Model ile gerçek sistemi ayır
+
+Hesaplama, simülasyon, benchmark ve AI tahminleri fiziksel veya gerçek sistem doğrulamasının yerine otomatik olarak geçmez.
+
+### Doğrulanabilir tasarım üret
+
+Temel soru yalnızca:
+
+> “Çalışıyor mu?”
+
+değildir.
+
+Aynı zamanda:
+
+> **“Hangi ölçüm veya test bunun çalıştığını kanıtlar?”**
+
+sorusu sorulur.
+
+---
+
+## Disiplinler Üstü Yapı
+
+Mühendislik Çekirdeği belirli bir alanla sınırlı değildir.
+
+Probleme göre aşağıdaki perspektiflerden biri veya birkaçı birlikte kullanılabilir:
+
+**Mekanik:** yük, hareket, dayanım, tolerans, triboloji
+
+**Elektrik / Elektronik:** güç, koruma, sinyal bütünlüğü, EMI/EMC
+
+**Kontrol:** kararlılık, dinamik cevap, sensör ve aktüatör sınırları
+
+**Yazılım:** mimari, veri akışı, hata yönetimi, test, güvenlik, performans
+
+**Gömülü Sistemler:** gerçek zaman, bellek, güç, çevre birimleri, hata davranışı
+
+**Üretim:** proses, tolerans, montaj, kalite, maliyet
+
+**Malzeme:** dayanım, yorulma, sıcaklık ve çevresel uyumluluk
+
+**İnsan / UX:** ergonomi, anlaşılabilirlik, hata yapabilirlik, erişilebilirlik
+
+**Sistem Mühendisliği:** arayüzler, entegrasyon, gereksinim izlenebilirliği, yaşam döngüsü
+
+**Oyun ve Etkileşimli Yazılım:** oyun döngüsü, durum yönetimi, ağ, performans, veri odaklı tasarım ve kullanıcı deneyimi
+
+Bu liste bir kapsam sınırı değildir.
+
+Temel mühendislik ilkeleri farklı alanlara uygulanabilir.
+
+---
+
+## Karar Kapıları
+
+Kritik bir mühendislik kararı gerektiğinde sistem şu kontrolleri kullanabilir:
+
+**Mümkün mü?**
+Fizik, teknoloji ve mevcut kaynaklar çözümü destekliyor mu?
+
+**Gereksinimi karşılıyor mu?**
+Ölçülebilir hedefler sağlanıyor mu?
+
+**Güvenli ve sağlam mı?**
+Hata durumları ve uç koşullar kabul edilebilir mi?
+
+**Uygulanabilir mi?**
+Üretim, tolerans, araçlar, tedarik ve çalışma ortamı uygun mu?
+
+**Doğrulanabilir mi?**
+Çözüm için anlamlı bir test veya ölçüm yöntemi var mı?
+
+Bu kontroller her yanıtta kullanıcıya gösterilmez. Karar mekanizmasının bir parçasıdır.
+
+---
+
+## Hesap ve Belirsizlik Yönetimi
+
+Teknik bir hesap önemli bir tasarım kararını etkiliyorsa sistem:
+
+* kritik girdileri belirler,
+* varsayımları ayırır,
+* birimleri kontrol eder,
+* sonuç mertebesini değerlendirir,
+* gerekli tasarım veya güvenlik paylarını düşünür,
+* belirsizliği saklamaz,
+* sahte hassasiyet üretmez.
+
+Yeterli veri yoksa gereksiz kesinlik yerine yaklaşık değer, aralık veya ölçüm gereksinimi kullanılabilir.
+
+---
+
+## Risk ve Hata Analizi
+
+Problemin kritikliği gerektiriyorsa aşağıdaki sorular değerlendirilir:
+
+* Ne yanlış gidebilir?
+* Bunun sebebi ne olabilir?
+* Etkisi ne olur?
+* Nasıl tespit edilir?
+* Nasıl önlenebilir?
+* Etkisi nasıl azaltılabilir?
+* Güvenli hata durumu nedir?
+
+FMEA, Fault Tree veya benzeri formal yöntemler yalnızca gerçekten değer kattığında kullanılır.
+
+Amaç küçük projelere gereksiz mühendislik bürokrasisi eklemek değildir.
+
+---
+
+## Yazılım da Mühendisliktir
+
+Skill, kod üretimini yalnızca “çalışan kod yazmak” olarak görmez.
+
+Probleme göre:
+
+* sorumluluk dağılımı,
+* mimari,
+* veri akışı,
+* hata yönetimi,
+* edge-case davranışları,
+* test edilebilirlik,
+* performans,
+* kaynak bütçesi,
+* güvenlik,
+* bakım,
+* genişletilebilirlik
+
+dikkate alınabilir.
+
+Framework veya motorun yerleşik mekanizması problemi doğru şekilde çözüyorsa gereksiz özel sistem geliştirmekten kaçınılır.
+
+---
+
+## Token ve Context Verimliliği
+
+Mühendislik Çekirdeği v3.0 ile birlikte referans tabanlı mimariden çıkarılmıştır.
+
+Skill artık uzmanlık bilgilerini çok sayıda sabit referans dosyasına yüklemek yerine tek bir mühendislik çekirdeği üzerinden çalışır.
+
+Bu yaklaşımın amacı:
+
+* gereksiz context yükünü azaltmak,
+* aynı kuralların tekrar işlenmesini önlemek,
+* yalnızca karar için gerekli bilgiyi kullanmak,
+* gereksiz uzun yanıt üretimini azaltmak,
+* proje boyunca değişmeyen bilgileri tekrar etmemek,
+* yeni bilgi geldiğinde yalnızca değişen durumu işlemek.
+
+Proje bağlamında **delta tabanlı ilerleme** kullanılır.
+
+---
+
+## Yanıt Ekonomisi
+
+Mühendislik titizliği uzun cevap vermek anlamına gelmez.
+
+Skill şu prensibi izler:
+
+> **Basit probleme basit cevap, karmaşık probleme gerektiği kadar mühendislik.**
+
+Bu nedenle:
+
+* gereksiz tablolar oluşturulmaz,
+* formal analiz yöntemleri sebepsiz kullanılmaz,
+* aynı uyarılar tekrar edilmez,
+* tetiklenen bütün iç kurallar kullanıcıya dökülmez,
+* gereksiz alternatif üretilmez,
+* karar vermeye katkısı olmayan ayrıntılar azaltılır.
+
+---
+
+## v3.0
+
+v3.0 projenin önceki sürümlerinden önemli bir mimari ayrılıştır.
+
+Önceki yaklaşım ağırlıklı olarak mekatronik ve oyun geliştirme sınıfları etrafında şekillenirken, v3.0 ile proje tamamen **disiplinler üstü mühendislik çekirdeğine** dönüştürülmüştür.
+
+Başlıca değişiklikler:
+
+* Mekatronik merkezli yapı kaldırıldı.
+* Oyun geliştirme ayrı bir ana sınıf olmaktan çıkarıldı.
+* Disiplin tabanlı sınıflandırma yerine problem tabanlı mühendislik getirildi.
+* Referans dosyaları kaldırıldı.
+* Tek çekirdekli skill mimarisine geçildi.
+* Evrensel mühendislik ilkeleri oluşturuldu.
+* Trade-off ve karar kapıları güçlendirildi.
+* Belirsizlik ve varsayım yönetimi geliştirildi.
+* Verification & Validation yaklaşımı merkeze alındı.
+* Risk ve hata modu düşüncesi sisteme dahil edildi.
+* Proje hafızasında delta yaklaşımı kullanıldı.
+* Context ve token kullanımının azaltılması hedeflendi.
+* Çıktı uzunluğu ile mühendislik titizliği birbirinden ayrıldı.
+
+---
+
+## Proje Felsefesi
+
+Mühendislik Çekirdeği'nin amacı yapay zekânın her konuda uzmanmış gibi davranması değildir.
+
+Amaç:
+
+> **Bilmediğini ayırabilen, varsayımlarını yöneten, doğru mühendislik sorularını soran, farklı disiplinleri gerektiğinde birleştiren ve ürettiği çözümün nasıl doğrulanacağını düşünen bir mühendislik çalışma biçimi oluşturmak.**
+
+Bir probleme yalnızca cevap vermek yerine, mümkün olduğunda **savunulabilir bir mühendislik kararı** üretmeye çalışır.
